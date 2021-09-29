@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="02-changeset-user-settings" author="epam_user">
+        <sql dbms="oracle">
+            CREATE TABLE UserSettings
+            (
+                id         integer PRIMARY KEY,
+                userId     integer     NOT NULL,
+                deviceType varchar2(20) NOT NULL,
+                content    VARCHAR2(4000)
+                    CONSTRAINT ensure_json CHECK (content IS JSON)
+            )
+        </sql>
+    </changeSet>
+</databaseChangeLog>
+    <!--<createTable tableName="UserSettings">
+        <column name="id" type="int" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="userId" type="int"/>
+        <column name="deviceType" type="varchar(20)"/>
+        <column name="content" type="varchar(500)"/>
+    </createTable>
+</changeSet>
+<changeSet id="02-changeset-user-settings-2" author="epam_user">
+    <addUniqueConstraint
+            columnNames="userID, deviceType"
+            constraintName="userIdAndDeviceType"
+            tableName="userSettings"
+    />
+</changeSet>
+<changeSet id="02-changeset-user-settings-3" author="epam_user">
+    <pro:addCheckConstraint constraintName="ensure_json"
+                            disabled="false"
+                            schemaName="epam"
+                            tableName="UserSettings"
+                            validate="true">content IS JSON
+    </pro:addCheckConstraint>
+</changeSet>
+
+liquibase doesn't support CONSTRAINT ensure_json, we have to use native SQL
+<sql dbms=oracle>
+    CREATE TABLE table_name (
+        content varchar NOT NULL,
+        flter blob CONSTRAINT ensure_json CHECK (filters IS JSON)
+    )
+</sql>-->
