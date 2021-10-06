@@ -1,3 +1,0 @@
-jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/FXG_INT_LAS_SVC1_L1,cn=OracleContext,dc=ground,dc=fedex,dc=com
-INT_APP
-imagine
